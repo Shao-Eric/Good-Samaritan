@@ -65,7 +65,7 @@ class RegistrationForm extends React.Component {
           value={this.state.username}
         />
         <TextInput
-          placeholder="user@qmail.cuny.edu"
+          placeholder="user@email.com"
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}

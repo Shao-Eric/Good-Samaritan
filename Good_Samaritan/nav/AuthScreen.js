@@ -90,11 +90,11 @@ export default class AuthCheck extends React.Component {
 
   render() {
     if (this.state.login_status == 0) {
-      return <MainNavigator screenProps={{ setName: name => this.setNewDisplayName(name) }}/>;
-    } else if (this.state.login_status == 1) {
       return (
         <MainNavigator2/>
       );
+    } else if (this.state.login_status == 1) {
+      return <FormScreen />;
     } else {
       return <AppLoading />;
     }
