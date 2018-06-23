@@ -54,7 +54,8 @@ export default class AuthCheck extends React.Component {
       databaseURL: 'https://good-samaritan-e3105.firebaseio.com',
       projectId: 'good-samaritan-e3105',
       storageBucket: 'good-samaritan-e3105.appspot.com',
-      messagingSenderId: '698386890442'    });
+      messagingSenderId: '698386890442'
+    });
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -87,7 +88,7 @@ export default class AuthCheck extends React.Component {
       )
     }else if (this.state.login_status == 1){
       return(
-        <StackNavigator/>
+        <ProfileScreen/>
       )
     }else{
       return(
