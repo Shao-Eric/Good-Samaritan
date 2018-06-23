@@ -78,15 +78,28 @@ export default class FormScreen extends React.Component {
         location: value.location,
         description: value.description
       };
-      /*
-... soon to be updated
-*/
+      firebase
+        .database()
+        .ref(this.state.choices + '/posts')
+        .push()
+        .set({
+          postinginfo: {
+            description: data.description,
+            title: data.title,
+            location: data.location,
+            poster: firebase.auth().currentUser.uid
+          }
+        });
+      this.props.navigation.goBack();
     }
   };
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text style={{ marginBottom: 16, fontSize: 25 }}>
+          Input Request Information
+        </Text>
         <Form
           ref="form"
           type={newUser}
@@ -97,7 +110,7 @@ export default class FormScreen extends React.Component {
 
         <Picker
           selectedValue={this.state.choices}
-          style={[styles.container]}
+          style={styles.picker}
           onValueChange={(itemValue, itemIndex) =>
             this.setState({ choices: itemValue })
           }
@@ -106,11 +119,7 @@ export default class FormScreen extends React.Component {
           <Picker.Item label="Giveaway" value="giveaway" />
           <Picker.Item label="Exchange" value="exchange" />
         </Picker>
-        <TouchableHighlight onPress={this._handleAdd}>
-          <Text style={[styles.submitButton, styles.submitButtonText]}>
-            Submit
-          </Text>
-        </TouchableHighlight>
+        <Button onPress={this._handleAdd} title="Submit" />
       </KeyboardAvoidingView>
     );
   }
@@ -145,7 +154,7 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: '#2352a3',
     padding: 10,
-    margin: 4,
+    marginTop: 20,
     width: '100%'
   },
   submitButtonText: {
@@ -162,5 +171,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#b8bbc1',
     height: 90
+  },
+  picker: {
+    color: 'red'
   }
 });

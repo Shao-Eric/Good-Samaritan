@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
-
-import Card from './Card';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import firebase from 'firebase';
 import CardSection from './login/CardSection';
-
-export default class Post extends Component {
+import { withNavigation } from 'react-navigation';
+class Post extends Component {
   render() {
     const lng = -74.006;
     const lat = 40.7128;
@@ -19,7 +18,16 @@ export default class Post extends Component {
       lng +
       '&maptype=roadmap&key=AIzaSyDKrWzEk1gBDDyBI0zSQgD5TPiHvXd1UHQ';
     return (
-      <Card>
+      <TouchableOpacity
+        style={styles.containerStyle}
+        onPress={() =>
+          this.props.navigation.navigate('chatscreen', {
+            requesterid: this.props.requesterId,
+            userid: firebase.auth().currentUser.uid,
+            postid: this.props.postid
+          })
+        }
+      >
         <View style={{ margin: 4, borderRadius: 5 }}>
           {/* Title Type Location Description Photo? */}
           <Image source={{ uri: staticmap }} style={styles.imageStyle} />
@@ -27,12 +35,12 @@ export default class Post extends Component {
 
         <CardSection>
           <View style={styles.textContainer}>
-            <Text style={{ fontSize: 18 }}>Post Title</Text>
-            <Text style={{ fontSize: 12 }}>Category</Text>
-            <Text style={{ fontSize: 12 }}>Date Posted</Text>
+            <Text style={{ fontSize: 18 }}>{this.props.title}</Text>
+            <Text style={{ fontSize: 12 }}>{this.props.category}</Text>
+            <Text style={{ fontSize: 12 }}>{this.props.description}</Text>
           </View>
         </CardSection>
-      </Card>
+      </TouchableOpacity>
       // <View style={{ margin: 4, borderRadius: 5 }}>
       //   {/* Title Type Location Description Photo? */}
       //   <Image
@@ -53,6 +61,7 @@ export default class Post extends Component {
     );
   }
 }
+export default withNavigation(Post);
 
 const styles = {
   imageStyle: {
@@ -63,5 +72,20 @@ const styles = {
   textContainer: {
     justifyContent: 'space-around',
     padding: 8
+  },
+  containerStyle: {
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    //width means left or right, height is top and bottom
+    shadowOpacity: 0.1,
+    shadowRadius: 2, //same purpose as borderRadius
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 1 //same margin property as CSS
   }
 };
