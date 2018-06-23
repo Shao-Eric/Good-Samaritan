@@ -4,8 +4,12 @@ import Registration from '../components/login/Registration';
 
 export default class RegisterScreen extends React.Component {
   render() {
+    //const { setName } = this.props.navigation.state.params;
     return (
-        <Registration style={{flex:1}} />
+      <Registration
+        setName={name => this.props.setName(name)}
+        style={{ flex: 1 }}
+      />
     );
   }
 }

@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import RegistrationForm from './RegistrationForm';
-
-export default class App extends React.Component {
+//onPress={() => firebase.auth().signOut()
+export default class Registration extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -21,7 +21,7 @@ export default class App extends React.Component {
           <Text style={styles.title}>The Robin Good App</Text>
         </View>
         <View style={styles.formContainer}>
-          <RegistrationForm />
+          <RegistrationForm setName={name => this.props.setName(name)} />
         </View>
       </KeyboardAvoidingView>
     );
