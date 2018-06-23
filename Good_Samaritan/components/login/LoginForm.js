@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import CardSection from './CardSection';
 import Spinner from './Spinner';
+import { withNavigation } from 'react-navigation';
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   state = {
     email: '',
     password: '',
@@ -27,13 +28,14 @@ export default class LoginForm extends React.Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(this.onLoginSuccess.bind(this))
-      .catch(() => {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(this.onLoginSuccess.bind(this))
-          .catch(this.onLoginFail.bind(this));
-      });
+      .catch(this.onLoginFail.bind(this));
+    // .catch(() => {
+    //   firebase
+    //     .auth()
+    //     .createUserWithEmailAndPassword(email, password)
+    //     .then(this.onLoginSuccess.bind(this))
+    //     .catch(this.onLoginFail.bind(this));
+    // });
   }
 
   onLoginFail() {
@@ -61,12 +63,13 @@ export default class LoginForm extends React.Component {
       </TouchableOpacity>
     );
   }
+
   render() {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
         <TextInput
-          placeholder="user@qmail.cuny.edu"
+          placeholder="user@email.com"
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}
@@ -89,13 +92,18 @@ export default class LoginForm extends React.Component {
         />
         <Text style={styles.errorTextStyle}>{this.state.error}</Text>
         {this.renderButton()}
-        <TouchableOpacity style={styles.joinContainer}>
+        <TouchableOpacity
+          style={styles.joinContainer}
+          onPress={() => this.props.navigation.navigate('reg')}
+        >
           <Text style={styles.joinText}>Not a member? Join Today</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+export default withNavigation(LoginForm);
 
 const styles = {
   container: {
