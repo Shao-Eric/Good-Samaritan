@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import CardSection from './CardSection';
 import Spinner from './Spinner';
+import { withNavigation } from 'react-navigation';
 
-export default class LoginForm extends React.Component {
+class RegistrationForm extends React.Component {
   state = {
+    username: '',
     email: '',
     password: '',
     error: '',
@@ -25,27 +27,15 @@ export default class LoginForm extends React.Component {
 
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(this.onLoginSuccess.bind(this))
-      .catch(() => {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(this.onLoginSuccess.bind(this))
-          .catch(this.onLoginFail.bind(this));
-      });
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        this.props.setName(this.state.username);
+      })
+      .catch(this.onLoginFail.bind(this));
   }
 
   onLoginFail() {
-    this.setState({ error: 'Authentication Failed', loading: false });
-  }
-  onLoginSuccess() {
-    this.setState({
-      email: '',
-      password: '',
-      loading: false,
-      error: ''
-    });
+    this.setState({ error: 'Registration Failed - Bad Input', loading: false });
   }
 
   renderButton() {
@@ -57,7 +47,7 @@ export default class LoginForm extends React.Component {
         style={styles.buttonContainer}
         onPress={this.onButtonPress.bind(this)}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     );
   }
@@ -71,9 +61,11 @@ export default class LoginForm extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.input}
+          onChangeText={name => this.setState({ username: name })}
+          value={this.state.username}
         />
         <TextInput
-          placeholder="user@qmail.cuny.edu"
+          placeholder="user@email.com"
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
           onSubmitEditing={() => this.passwordInput.focus()}
@@ -96,13 +88,18 @@ export default class LoginForm extends React.Component {
         />
         <Text style={styles.errorTextStyle}>{this.state.error}</Text>
         {this.renderButton()}
-        <TouchableOpacity style={styles.joinContainer}>
-          <Text style={styles.joinText}>Not a member? Join Today</Text>
+        <TouchableOpacity
+          style={styles.joinContainer}
+          onPress={() => this.props.navigation.navigate('login')}
+        >
+          <Text style={styles.joinText}>Go Back to Login Page</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+export default withNavigation(RegistrationForm);
 
 const styles = {
   container: {

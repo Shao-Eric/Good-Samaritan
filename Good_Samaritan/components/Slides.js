@@ -10,16 +10,10 @@ class Slides extends Component {
       return (
         <View>
           <Button
-            title="Login Here"
+            title="Let's RobinGood"
             raised
             buttonStyle={styles.buttonStyle}
             onPress={this.props.onLogin}
-          />
-
-          <Button
-            title="Register Today"
-            buttonStyle={styles.buttonStyle}
-            onPress={this.props.onRegister}
           />
         </View>
       );
