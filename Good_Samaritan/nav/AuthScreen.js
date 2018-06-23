@@ -87,7 +87,7 @@ export default class AuthCheck extends React.Component {
       )
     }else if (this.state.login_status == 1){
       return(
-        <StackNavigator/>
+        <MessageScreen/>
       )
     }else{
       return(
