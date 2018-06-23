@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import ElevatedView from 'react-native-elevated-view';
+
 import Card from './Card';
 import CardSection from './login/CardSection';
 

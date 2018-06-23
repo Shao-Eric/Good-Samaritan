@@ -5,13 +5,13 @@ import {
   Text,
   Keyboard,
   TextInput,
-  ScrollView,
+  KeyboardAvoidingView,
   TouchableHighlight,
   Picker,
   Button
 } from 'react-native';
 import firebase from 'firebase';
-import t from 'tcomb-form-native'
+import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
 
@@ -34,7 +34,10 @@ const options = {
     description: {
       autoCapitalize: 'none',
       description: true,
-      autoCorrect: false
+      autoCorrect: false,
+      attrs: {
+        multiline: true
+      }
     }
   }
 };
@@ -83,7 +86,7 @@ export default class FormScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Form
           ref="form"
           type={newUser}
@@ -91,9 +94,14 @@ export default class FormScreen extends React.Component {
           value={this.state.value}
           onChange={this._onChange}
         />
-        <Picker selectedValue={this.state.choices}
+
+        <Picker
+          selectedValue={this.state.choices}
           style={[styles.container]}
-          onValueChange={(itemValue, itemIndex) => this.setState({choices: itemValue})}>
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ choices: itemValue })
+          }
+        >
           <Picker.Item label="Service" value="service" />
           <Picker.Item label="Giveaway" value="giveaway" />
           <Picker.Item label="Exchange" value="exchange" />
@@ -103,17 +111,16 @@ export default class FormScreen extends React.Component {
             Submit
           </Text>
         </TouchableHighlight>
-      </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingTop: 100,
     padding: 40
   },
   input: {
@@ -144,5 +151,16 @@ const styles = StyleSheet.create({
   submitButtonText: {
     textAlign: 'center',
     color: 'white'
+  },
+  inputStyle: {
+    height: 40,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    marginBottom: 10,
+    color: 'black',
+    paddingHorizontal: 10,
+    fontSize: 20,
+    borderWidth: 1,
+    borderColor: '#b8bbc1',
+    height: 90
   }
 });
