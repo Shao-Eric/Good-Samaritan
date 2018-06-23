@@ -94,11 +94,8 @@ export default class LoginForm extends React.Component {
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        //error message
         <Text style={styles.errorTextStyle}>{this.state.error}</Text>
-        //render login button
         {this.renderButton()}
-        //join button
         <TouchableOpacity style={styles.joinContainer}>
           <Text style={styles.joinText}>Not a member? Join Today</Text>
         </TouchableOpacity>

@@ -6,22 +6,20 @@ import {
   Image,
   KeyboardAvoidingView
 } from 'react-native';
-import LoginForm from './LoginForm';
+import LoginForm from '../components/login/LoginForm';
 import firebase from 'firebase';
 
-export default class App extends React.Component {
+export default class LoginScreen extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        //logo:
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
-            source={require('../../images/RobinHood.png')}
+            source={require('../images/RobinHood.png')}
           />
           <Text style={styles.title}>The Robin Good App</Text>
         </View>
-        //form:
         <View style={styles.formContainer}>
           <LoginForm />
         </View>

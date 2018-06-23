@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
-import { AppLoading } from 'expo';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
@@ -23,16 +22,13 @@ class WelcomeScreen extends Component {
   // }
 
   onLogin = () => {
-    this.props.navigation.navigate('auth');
+    this.props.navigation.navigate('login');
   };
 
   onRegister = () => {
     this.props.navigation.navigate('reg');
   };
   render() {
-    // if (this.state.token === null) {
-    //   return <AppLoading />;
-    // }
     return (
       <Slides
         data={SLIDE_DATA}

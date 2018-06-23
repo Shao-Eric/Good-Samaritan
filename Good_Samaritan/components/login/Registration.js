@@ -13,7 +13,6 @@ export default class App extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        //logo:
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
@@ -21,7 +20,6 @@ export default class App extends React.Component {
           />
           <Text style={styles.title}>The Robin Good App</Text>
         </View>
-        //form:
         <View style={styles.formContainer}>
           <RegistrationForm />
         </View>

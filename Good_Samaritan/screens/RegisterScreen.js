@@ -5,9 +5,7 @@ import Registration from '../components/login/Registration';
 export default class RegisterScreen extends React.Component {
   render() {
     return (
-      <View style={styles.viewContainer}>
-        <Registration />
-      </View>
+        <Registration style={{flex:1}} />
     );
   }
 }
