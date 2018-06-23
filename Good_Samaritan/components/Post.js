@@ -57,7 +57,7 @@ export default class Post extends Component {
 const styles = {
   imageStyle: {
     height: 150,
-    width: 350,
+    width: null,
     flex: 1
   },
   textContainer: {

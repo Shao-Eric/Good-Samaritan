@@ -10,6 +10,7 @@ import {
   createBottomTabNavigator,
   createStackNavigator
 } from 'react-navigation';
+import FormScreen from '../screens/FormScreen'
 import MainScreen from '../screens/MainScreen'
 /*
   Login Status:
@@ -24,6 +25,9 @@ const MainNavigator2 = createStackNavigator(
     profile: {
       screen: ProfileScreen
     },
+    form: {
+      screen: FormScreen
+    }
   },
   {
       headerMode: 'none'
@@ -91,10 +95,10 @@ export default class AuthCheck extends React.Component {
   render() {
     if (this.state.login_status == 0) {
       return (
-        <MainNavigator2/>
+        <MainNavigator/>
       );
     } else if (this.state.login_status == 1) {
-      return <FormScreen />;
+      return <MainNavigator2 />;
     } else {
       return <AppLoading />;
     }

@@ -48,11 +48,18 @@ export default class MainScreen extends Component{
       <View style={{flex:1, }}>
         <View style={{backgroundColor: '#9ECBC8', paddingTop: Constants.statusBarHeight, flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={{color: 'white',padding:12, fontSize: 18}}>RobinGood</Text>
-          <TouchableOpacity
-            onPress={()=>  this.props.navigation.navigate('profile')}
-          >
-            <FontAwesome name="user-circle" size={24} color='white' style={{padding:12}}/>
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={()=>  this.props.navigation.navigate('form')}
+            >
+              <MaterialIcons name="add-circle-outline" size={30} color='white' style={{padding:12}}/>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={()=>  this.props.navigation.navigate('profile')}
+            >
+              <FontAwesome name="user-circle" size={24} color='white' style={{padding:12}}/>
+            </TouchableOpacity>
+          </View>
         </View>
         <StackNavigator style={{flex:1}}/>
       </View>
