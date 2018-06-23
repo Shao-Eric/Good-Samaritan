@@ -6,38 +6,34 @@ import {
   Keyboard,
   TextInput,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  Picker,
+  Button
 } from 'react-native';
-import * as firebase from 'firebase';
-
-const t = require('tcomb-form-native');
+import firebase from 'firebase';
+import t from 'tcomb-form-native'
 
 const Form = t.form.Form;
 
 const newUser = t.struct({
-  firstname: t.String,
-  lastname: t.String,
-  email: t.String,
-  password: t.String
+  title: t.String,
+  location: t.String,
+  description: t.String
 });
 
 const options = {
   fields: {
-    firstname: {
+    title: {
       autoCapitalize: 'words',
       autoCorrect: false
     },
-    lastname: {
-      autoCapitalize: 'words',
-      autoCorrect: false
-    },
-    email: {
+    location: {
       autoCapitalize: 'none',
       autoCorrect: false
     },
-    password: {
+    description: {
       autoCapitalize: 'none',
-      password: true,
+      description: true,
       autoCorrect: false
     }
   }
@@ -48,10 +44,9 @@ export default class FormScreen extends React.Component {
     super(props);
     this.state = {
       value: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: ''
+        title: '',
+        location: '',
+        description: ''
       }
     };
   }
@@ -59,10 +54,9 @@ export default class FormScreen extends React.Component {
   componentWillUnmount() {
     this.setState = {
       value: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: null
+        title: '',
+        location: '',
+        description: null
       }
     };
   }
@@ -77,10 +71,9 @@ export default class FormScreen extends React.Component {
     const value = this.refs.form.getValue();
     if (value) {
       const data = {
-        firstname: value.firstname,
-        lastname: value.lastname,
-        email: value.email,
-        password: value.password
+        title: value.title,
+        location: value.location,
+        description: value.description
       };
       /*
 ... soon to be updated
@@ -98,9 +91,16 @@ export default class FormScreen extends React.Component {
           value={this.state.value}
           onChange={this._onChange}
         />
+        <Picker selectedValue={this.state.choices}
+          style={[styles.container]}
+          onValueChange={(itemValue, itemIndex) => this.setState({choices: itemValue})}>
+          <Picker.Item label="Service" value="service" />
+          <Picker.Item label="Giveaway" value="giveaway" />
+          <Picker.Item label="Exchange" value="exchange" />
+        </Picker>
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={[styles.submitButton, styles.submitButtonText]}>
-            Create account
+            Submit
           </Text>
         </TouchableHighlight>
       </ScrollView>
@@ -108,12 +108,12 @@ export default class FormScreen extends React.Component {
   }
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
     flex: 1,
-    backgroundColor: '#222',
+    backgroundColor: 'white',
     padding: 40
   },
   input: {
@@ -125,8 +125,17 @@ const styles = StyleSheet.create({
     color: 'white',
     borderWidth: 1
   },
+  descInput: {
+    padding: 8,
+    width: '100%',
+    height: '40%',
+    margin: 4,
+    backgroundColor: '#444',
+    borderColor: '#000',
+    color: 'white',
+    borderWidth: 1
+  },
   submitButton: {
-    // background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%),
     backgroundColor: '#2352a3',
     padding: 10,
     margin: 4,
