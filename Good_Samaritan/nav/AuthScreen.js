@@ -5,15 +5,12 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import { AppLoading } from 'expo';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
+import ProfileScreen from '../screens/ProfileScreen'
 import {
   createBottomTabNavigator,
   createStackNavigator
 } from 'react-navigation';
-import FreeStuffScreen from '../screens/FreeStuffScreen';
-import ServicesScreen from '../screens/ServicesScreen';
-import MessageScreen from '../screens/MessageScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import FormScreen from '../screens/FormScreen';
+import MainScreen from '../screens/MainScreen'
 /*
   Login Status:
     -1 firebase auth loading.
@@ -21,7 +18,19 @@ import FormScreen from '../screens/FormScreen';
     1 user account found
 */
 
-const MainNavigator = createBottomTabNavigator(
+const MainNavigator2 = createStackNavigator(
+  {
+    welcome: { screen: MainScreen },
+    profile: {
+      screen: ProfileScreen
+    },
+  },
+  {
+      headerMode: 'none'
+  }
+);
+
+const MainNavigator = createStackNavigator(
   {
     welcome: { screen: WelcomeScreen },
     reg: {
@@ -29,26 +38,14 @@ const MainNavigator = createBottomTabNavigator(
     },
     login: {
       screen: LoginScreen
-    }
+    },
   },
   {
-    navigationOptions: {
-      tabBarVisible: false
-    }
+      headerMode: 'none'
   }
 );
 
-const StackNavigator = createStackNavigator({
-  contentView: {
-    screen: createBottomTabNavigator({
-      stuff: { screen: FreeStuffScreen },
-      services: { screen: ServicesScreen }
-    })
-  },
-  chatscreen: { screen: MessageScreen },
-  profile: { screen: ProfileScreen },
-  form: { screen: FormScreen }
-});
+
 
 export default class AuthCheck extends React.Component {
   constructor(props) {
@@ -96,8 +93,7 @@ export default class AuthCheck extends React.Component {
       return <MainNavigator screenProps={{ setName: name => this.setNewDisplayName(name) }}/>;
     } else if (this.state.login_status == 1) {
       return (
-        <StackNavigator
-        />
+        <MainNavigator2/>
       );
     } else {
       return <AppLoading />;

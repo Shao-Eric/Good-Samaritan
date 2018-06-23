@@ -27,6 +27,7 @@
     "react-native-elevated-view": "^0.0.6",
     "react-native-modal-dropdown": "^0.6.2",
     "react-navigation": "^2.5.1",
+    "react-navigation-material-bottom-tabs": "^0.3.0",
     "tcomb-form-native": "^0.6.13"
   }
 }
