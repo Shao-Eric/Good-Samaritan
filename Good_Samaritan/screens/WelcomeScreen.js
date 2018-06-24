@@ -3,9 +3,9 @@ import { View, Text, AsyncStorage } from 'react-native';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
-  { text: 'Welcome to the Robin Good', color: '#03A9F4' },
+  { text: 'Welcome to the RobinGood', color: '#03A9F4' },
   { text: 'Use this app to help each other locally', color: '#009688' },
-  { text: 'Set your location, and start Robin Good', color: '#03A9F4' }
+  { text: 'Set your location, and start RobinGood', color: '#03A9F4' }
 ];
 
 class WelcomeScreen extends Component {

@@ -48,7 +48,7 @@ export default class ProfileScreen extends React.Component {
           {/* To Be Replaced With displayName */}
 
           <Text style={{ padding: 8, fontSize: 18, color: 'white' }}>
-            davidmargolin (HelperScore: 18)
+            Eric (HelperScore: 18)
           </Text>
         </View>
 

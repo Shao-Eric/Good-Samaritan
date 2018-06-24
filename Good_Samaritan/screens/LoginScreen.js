@@ -14,10 +14,7 @@ export default class LoginScreen extends React.Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image
-            style={styles.logo}
-            source={require('../images/RobinHood.png')}
-          />
+          <Image style={styles.logo} source={require('../images/robin.png')} />
           <Text style={styles.title}>The Robin Good App</Text>
         </View>
         <View style={styles.formContainer}>

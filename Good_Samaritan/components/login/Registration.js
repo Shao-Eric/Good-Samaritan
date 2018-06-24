@@ -16,7 +16,7 @@ export default class Registration extends React.Component {
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
-            source={require('../../images/RobinHood.png')}
+            source={require('../../images/robin.png')}
           />
           <Text style={styles.title}>The Robin Good App</Text>
         </View>
